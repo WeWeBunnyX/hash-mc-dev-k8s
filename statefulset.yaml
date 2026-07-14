@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: minecraft
-        image: itzg/minecraft-server
+        image: itzg/minecraft-server:java8
         env:
         - name: EULA
           value: "true"
