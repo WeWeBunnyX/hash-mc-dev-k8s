@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: forge-server
+  namespace: minecraft
+spec:
+  serviceName: "minecraft-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-server
+        env:
+        - name: EULA
+          value: "true"
+        - name: TYPE
+          value: "FORGE"
+        - name: VERSION
+          value: "1.7.10"
+        - name: MEMORY
+          value: "2G"
+        ports:
+        - containerPort: 25565
+          name: game
+        volumeMounts:
+        - name: datadir
+          mountPath: /data
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: minecraft-data
