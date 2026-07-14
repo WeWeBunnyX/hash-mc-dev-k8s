@@ -26,6 +26,8 @@ spec:
           value: "1.7.10"
         - name: MEMORY
           value: "2G"
+        - name: ONLINE_MODE
+          value: "FALSE"
         ports:
         - containerPort: 25565
           name: game
